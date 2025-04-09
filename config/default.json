@@ -1,0 +1,23 @@
+{
+  "port": 3003,
+  "db_host": "localhost",
+  "db_username": "postgres",
+  "db_password": "moykanal17",
+  "db_port": 5432,
+  "db_name": "avias_ijara",
+
+  "expiration_minute": 5,
+  "crypt_password": "MysecretPasswordForOtp",
+  "iv": "88888888",
+  "jwt_secret": "mySecretToken",
+  "jwt_refresh_secret": "mySecretToken",
+  "sms_token": ".secrete.BY", 
+  "sms_secrete_key": "notify.eskiz.uz/api/message/sms/send",
+
+
+  "email_service": "gmail",
+  "email_user": "sevarahalilova28@gmail.com",
+  "email_pass": "cboj xyau wwly ktud"
+
+
+}
