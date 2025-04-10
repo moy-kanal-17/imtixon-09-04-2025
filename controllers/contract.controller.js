@@ -1,5 +1,6 @@
 const  Contract  = require('../models/contract');
 const { Op } = require('sequelize');
+const { message } = require('../validations/admin.validation');
 
 const createContract = async (req, res) => {
     try {
@@ -27,10 +28,7 @@ const createContract = async (req, res) => {
 const getAllContracts = async (req, res) => {
     try {
         const contracts = await Contract.findAll();
-        return res.status(200).json({
-            message: 'All contracts fetched successfully',
-            contracts,
-        });
+        return res.status(200).json({message:`contracts:`,contracts})
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: error.message });
@@ -108,7 +106,7 @@ const getContractsByStatus = async (req, res) => {
         const { status } = req.params;
 
         const contracts = await Contract.findAll({
-            where: { status: { [Op.eq]: status } },
+            where: { status:  status  },
         });
 
         return res.status(200).json({

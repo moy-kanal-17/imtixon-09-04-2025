@@ -5,6 +5,10 @@ const { sequelize } = require("../config/db");
 const Payment = sequelize.define(
   "Payment",
   {
+    ownerId:{
+      type:DataTypes.INTEGER,
+      allowNull:true
+    },
     userId: {
       type: DataTypes.INTEGER,
         allowNull: false,

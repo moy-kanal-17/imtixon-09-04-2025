@@ -1,13 +1,17 @@
 const express = require("express");
+const { createContract, getAllContracts, getContractById, updateContract, deleteContract, getContractsByStatus, cancelContract } = require("../controllers/contract.controller");
+const selfGuard = require("../guards/self.guard");
+const isAdmin = require("../guards/admin.guard");
+const authMiddleware = require("../middleware/auth.middleware");
 const router = express.Router();
-const contractController = require("../controllers/contract.controller");
 
-router.post("/", contractController.createContract);
-router.get("/", contractController.getAllContracts);
-router.get("/:id", contractController.getContractById);
-router.put("/:id", contractController.updateContract);
-router.delete("/:id", contractController.deleteContract);
-router.get("/status/:status", contractController.getContractsByStatus);
-router.put("/cancel/:id", contractController.cancelContract);
+router.post("/", createContract);
+router.get("/",isAdmin,getAllContracts);
+router.get("/:id",isAdmin,getContractById);
+router.put("/:id",isAdmin,updateContract);
+router.delete("/:id",isAdmin,deleteContract);
+router.get("/status/:status",isAdmin,getContractsByStatus);
+router.put("/cancel/:id",cancelContract);
 
+router.use(authMiddleware)
 module.exports = router;

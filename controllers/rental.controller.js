@@ -254,6 +254,23 @@ const getol = async (req, res) => {
   }
 };
 
+
+
+//------------------------------------------4------------------------------------------
+
+const bizilip_qoldi = async (req,res)=>{
+  try {
+ const reply = await Contract.findAll({
+   where: { status: "bizilip_qoldi" },
+ });
+ res.status(202).json(reply)
+  } catch (error) {
+    errorHandler(error,req,res)
+    logger.error("hato,filter_4",error.message)
+  }
+}
+
+
 //------------------------------------------------------------------------//
 module.exports = {
   createRental,
@@ -264,6 +281,7 @@ module.exports = {
   cancelRental,
   getdate,
   getTop,
+  bizilip_qoldi
 
 
 };

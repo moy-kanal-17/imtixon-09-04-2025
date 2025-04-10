@@ -2,7 +2,9 @@ const Seller = require("../models/seller");
 
 const isOwner = async (req, res, next) => {
   try {
-    if (req.body.role !== "seller") {
+    console.log(req.user);
+    
+    if (req.user.role !== "seller") {
       return res
         .status(403)
         .json({ message: "Bu amalni faqat owner bajarishi mumkin" });

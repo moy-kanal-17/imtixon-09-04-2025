@@ -1,5 +1,8 @@
+const authMiddleware = require("../middleware/auth.middleware");
+
 const selfGuard = async (req, res, next) => {
   try {
+    authMiddleware()
     if (req.user.id !== parseInt(req.params.id)) {
       return res
         .status(403)

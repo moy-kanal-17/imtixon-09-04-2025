@@ -8,6 +8,7 @@ const {
   cancelRental,
   getdate,
   getTop,
+  bizilip_qoldi,
 } = require("../controllers/rental.controller");
 const isOwner = require("../guards/Owner.guard");
 const isAdmin = require("../guards/admin.guard");
@@ -28,6 +29,7 @@ router.get("/:id",isOwner, getRentalById);
 router.delete("/:id",isOwner, deleteRental);
 router.get("/filter/1",isAdmin,getdate)
 router.get("/filter/2",isAdmin, getTop);
+router.get("/filter/4",bizilip_qoldi)
 
 
 

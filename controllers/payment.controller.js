@@ -1,10 +1,13 @@
+const { where } = require("sequelize");
 const Payment = require("../models/payment");
+const { message } = require("../validations/admin.validation");
 
 const createPayment = async (req, res) => {
   try {
-    const { userId, amount, paymentMethod, transactionId } = req.body;
+    const { userId, amount, paymentMethod, transactionId,ownerID } = req.body;
     const payment = await Payment.create({
       userId,
+      ownerID,
       amount,
       paymentMethod,
       transactionId,
@@ -45,16 +48,17 @@ const getPaymentById = async (req, res) => {
 };
 
 // Update a payment by ID
-const updatePayment = async (req, res) => {
+const Pay = async (req, res) => {
   try {
     const { id } = req.params;
-    const { userId, amount, paymentMethod, status, transactionId } = req.body;
+    const { userId, amount, paymentMethod, status, transactionId,ownerID } = req.body;
     const payment = await Payment.findByPk(id);
     if (!payment) {
       return res.status(404).json({ message: "Payment not found" });
     }
     await payment.update({
       userId,
+      ownerId:ownerID,
       amount,
       paymentMethod,
       status,
@@ -85,10 +89,31 @@ const deletePayment = async (req, res) => {
   }
 };
 
+const filters = async (req,res)=>{
+  try {
+
+
+    const {userId,ownerID} = req.body
+    const result = await Payment.findAll({
+      where: {
+        userId: userId,
+        ownerId: ownerID,
+        status: "completed",
+      },
+    });
+   return res.status(202).json({message:"result chiqdi!",result})
+  } catch (error) {
+    console.log(error);
+    
+    
+  }
+}
+
 module.exports = {
   createPayment,
   getAllPayments,
   getPaymentById,
-  updatePayment,
+  Pay,
   deletePayment,
+  filters
 };
